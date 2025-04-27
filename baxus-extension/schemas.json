@@ -1,0 +1,32 @@
+[
+  [
+    "flaskfinewines.com",
+    {
+      "name": "Flask Fine Wines",
+      "version": "1.0",
+      "productNameSelector": "h1.product-single__title",
+      "pricePrioritySelector": "span.product__price.on-sale span.visually-hidden",
+      "fallbackPriceSelector": "span.product__price span.visually-hidden"
+    }
+  ],
+  [
+    "wine-searcher.com",
+    {
+      "name": "Wine-Searcher",
+      "version": "1.0",
+      "productNameSelector": "h1.h2.mb-0",
+      "pricePrioritySelector": "span.price.text-nowrap span.font-light-bold",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "totalwine.com",
+    {
+      "name": "Total Wine",
+      "version": "1.0",
+      "productNameSelector": "h1.productTitle__28e21c67",
+      "pricePrioritySelector": "div#edlpPrice.priceTxt__4a663926",
+      "fallbackPriceSelector": ""
+    }
+  ]
+]
