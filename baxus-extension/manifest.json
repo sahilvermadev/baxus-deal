@@ -29,5 +29,8 @@
       "resources": ["schemas.json", "baxus_catalog.json", "fuzzball.umd.min.js"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

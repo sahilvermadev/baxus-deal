@@ -8,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <!-- Header -->
     <header class="header">
       <div class="logo">
-        <img src="icons/icon48.png" alt="BAXUS Logo" width="24" height="24">
-        <h1>BA<span>X</span>US</h1>
+        <h1>BA<img src="icons/icon48.png" alt="BAXUS Logo" width="24" height="24">US DEAL</h1> 
       </div>
     </header>
 
@@ -47,19 +47,19 @@
             <div class="match-quality" id="match-quality"></div>
             <div class="baxus-name" id="baxus-name"></div>
             <div class="baxus-price">
-              <span class="label">BAXUS Price:</span>
+              <span class="label">Price:</span>
               <span id="baxus-price"></span>
             </div>
-            <div class="price-difference" id="price-difference"></div>
-            <a id="baxus-link" href="#" target="_blank" rel="noopener noreferrer" class="view-button">View on BAXUS</a>
+            <div class ="price-difference" id="price-difference"></div>
+            <a id="baxus-link" href="#" target="_blank" rel="noopener noreferrer" class="view-button primary">View on BAXUS</a>
           </div>
           <div id="unavailable-message" class="unavailable-message hidden"></div>
         </div>
 
         <!-- Unsupported Sites: Button and API Result -->
         <div id="unsupported-container" class="unsupported-container hidden">
-          <p class="unsupported-message">This site isn't directly supported yet, but we can still try to find matches for you.</p>
-          <button id="check-baxus-btn" class="button primary">Check for a Better Deal on BAXUS</button>
+          <p class="unsupported-message">This site isn't directly supported yet, but we can still try to find a match for you.</p>
+          <button id="check-baxus-btn" class="button primary">Search on BAXUS</button>
         </div>
         <div id="api-result" class="api-result hidden">
           <div id="baxus-match-api" class="baxus-match hidden">
@@ -82,10 +82,10 @@
       </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer
     <footer class="footer">
       <a href="https://baxus.co" target="_blank" rel="noopener noreferrer">Powered by BAXUS</a>
-    </footer>
+    </footer> -->
   </div>
   <script src="fuzzball.umd.min.js"></script>
   <script src="popup.js"></script>

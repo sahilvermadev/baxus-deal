@@ -8,14 +8,15 @@
   --background: #ffffff;
   --card-bg: #f9f9f9;
   --border: #e0e0e0;
-  --success: #4caf50;
+  --success: #6ead2f;
   --error: #f44336;
   --warning: #ff9800;
   --info: #2196f3;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08); */
   --radius: 8px;
   --radius-sm: 4px;
+  --radius-lg: 18px;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -27,8 +28,8 @@
 }
 
 body {
-  width: 320px; /* Reduced width */
-  min-height: 420px; /* Reduced height */
+  width: 260px; /* Reduced width */
+  min-height: 100px; /* Reduced height */
   background-color: var(--background);
   color: var(--text);
   font-size: 14px;
@@ -43,7 +44,7 @@ body {
   flex-direction: column;
   flex: 1; /* Take up all available space */
   position: relative; /* For proper footer positioning */
-  padding-bottom: 40px; /* Space for footer */
+  /* padding-bottom: 40px; Space for footer */
 }
 
 /* Header */
@@ -59,12 +60,14 @@ header {
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  /* gap: 8px; */
 }
 
 .logo img {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  padding-bottom: 3px;
 }
 
 .logo h1 {
@@ -85,7 +88,7 @@ header {
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
   flex: 1;
-  padding: 0 16px;
+  /* padding: 0 16px; */
 }
 
 /* Loading State */
@@ -186,10 +189,7 @@ header {
 .baxus-match {
   margin-bottom: 12px;
   padding: 12px;
-  /* border-radius: var(--radius); */
   background-color: white;
-  /* box-shadow: var(--shadow); */
-  /* border-top: 3px solid var(--success); */
   position: relative;
   overflow: hidden;
 }
@@ -205,7 +205,7 @@ header {
 }
 
 .match-quality {
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 600;
   color: var(--text-light);
   margin: 0 auto 10px;
@@ -234,11 +234,12 @@ header {
 
 .baxus-name {
   font-size: 14px;
-  font-weight: 600;
+  /* font-weight: 600; */
   color: var(--text);
   margin-bottom: 10px;
   line-height: 1.3;
   text-align: center;
+  font-family: "DM Serif Text", serif;
 }
 
 .baxus-price {
@@ -246,65 +247,61 @@ header {
   justify-content: space-around;
   align-items: center;
   /* background: rgba(0, 0, 0, 0.03); */
-  padding: 6px 26px;
+  font-family: "DM Serif Text", serif;
+  /* padding: 6px 26px; */
   border-radius: var(--radius-sm);
   margin-bottom: 10px;
 }
 
 .baxus-price .label {
+  font-family: "DM Serif Text", serif;
   font-size: 14px;
   color: var(--text-light);
 }
 
 .baxus-price span:last-child {
+  font-family: "DM Serif Text", serif;
   font-size: 14px;
   font-weight: 500;
   color: var(--secondary);
 }
 
 .price-difference {
-  font-size: 13px;
-  font-weight: 600;
-  margin: 10px 0;
-  padding: 6px 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "DM Serif Text", serif;
   border-radius: var(--radius-sm);
-  display: block;
-  text-align: center;
+  margin-bottom: 10px;
 }
 
-.price-difference.save {
-  background-color: rgba(76, 175, 80, 0.1);
+.price-difference .save {
+  font-family: "DM Serif Text", serif;
+  font-size: 14px;
+  color: var(--text-light);
   color: var(--success);
+
 }
 
-.price-difference.loss {
-  /* background-color: rgba(244, 67, 54, 0.1); */
-  color: var(--error);
-}
+.price-difference span:last-child {
+  font-family: "DM Serif Text", serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--success);
 
-.price-difference.same {
-  background-color: rgba(33, 150, 243, 0.1);
-  color: var(--info);
 }
 
 .view-button {
   display: block;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--secondary);
   background: var(--primary);
   text-decoration: none;
   padding: 8px 14px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   text-align: center;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(255, 204, 0, 0.2);
-}
-
-.view-button:hover {
-  background: var(--primary-dark);
-  box-shadow: 0 3px 8px rgba(255, 204, 0, 0.3);
-  transform: translateY(-1px);
 }
 
 /* Unavailable Message */
@@ -314,9 +311,6 @@ header {
   text-align: center;
   padding: 16px;
   background-color: white;
-  border-radius: var(--radius);
-  /* box-shadow: var(--shadow); */
-  border-top: 3px solid var(--warning);
   margin-bottom: 12px;
 }
 
@@ -326,7 +320,6 @@ header {
   padding: 12px;
   background-color: white;
   border-radius: var(--radius);
-  /* box-shadow: var(--shadow); */
 }
 
 .api-name {
@@ -364,8 +357,6 @@ header {
   text-align: center;
   padding: 16px;
   background-color: white;
-  /* border-radius: var(--radius); */
-  /* box-shadow: var(--shadow); */
   margin: 12px auto;
   max-width: 280px;
 }
@@ -379,7 +370,7 @@ header {
 
 .button {
   padding: 10px 16px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -387,18 +378,20 @@ header {
   border: none;
   outline: none;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(255, 204, 0, 0.2);
+  /* background: var(--secondary); */
+  /* box-shadow: 0 2px 4px rgba(255, 204, 0, 0.2); */
 }
 
 .primary {
-  background: var(--primary);
-  color: var(--secondary);
+  background: #000000;
+  color: ghostwhite;
 }
 
 .primary:hover {
+  color: ghostwhite;
   background: var(--primary-dark);
-  box-shadow: 0 3px 8px rgba(255, 204, 0, 0.3);
-  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(246, 197, 1, 0.3);
+  /* transform: translateY(-1px); */
 }
 
 /* Alternative Matches */
@@ -491,26 +484,3 @@ header {
   display: none;
 }
 
-/* Footer */
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-light);
-  padding: 10px;
-  background-color: var(--card-bg);
-  border-top: 1px solid var(--border);
-}
-
-footer a {
-  color: var(--secondary);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-footer a:hover {
-  color: var(--primary);
-}

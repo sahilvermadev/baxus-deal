@@ -21,13 +21,27 @@ async function loadCatalog() {
   return baxusCatalog;
 }
 
-// Normalize names for better matching
 function normalizeName(name) {
   if (!name) return "";
-  return name.toLowerCase()
-    .replace(/whisky|whiskey|scotch|single malt/gi, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  // List of common stop words to remove
+  const stopWords = [
+    'the', 'a', 'an', 'in', 'for', 'of', 'and', 'with', 'on', 'at', 'to', 
+    'bottled', 'by', 'from', 'distillery', 'cask', 'barrel', 'aged', 
+    'limited', 'edition', 'release', 'collection', 'series', 'blend', 
+    'batch', 'single cask'
+  ];
+  // Convert to lowercase, remove whisky-related terms, brackets, and clean whitespace
+  let normalized = name.toLowerCase()
+    .replace(/whisky|whiskey|scotch|single malt/gi, '') // Remove whisky terms
+    .replace(/[\(\[\{].*?[\)\]\}]/g, '') // Remove brackets and their contents
+    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .trim(); // Remove leading/trailing spaces
+  // Remove stop words
+  normalized = normalized
+    .split(' ')
+    .filter(word => !stopWords.includes(word))
+    .join(' ');
+  return normalized;
 }
 
 // Find the best match in the catalog using fuzzball
@@ -46,7 +60,7 @@ function findBestMatch(scrapedName) {
     const normalizedCatalogName = normalizeName(bottle.name);
     const score = fuzzball.ratio(normalizedScrapedName, normalizedCatalogName);
     console.log(`Comparing with ${normalizedCatalogName}: Score ${score}`);
-    if (score > highestScore && score >= 80) {
+    if (score > highestScore && score >= 75) {
       highestScore = score;
       bestMatch = bottle;
     }
@@ -55,7 +69,7 @@ function findBestMatch(scrapedName) {
   if (bestMatch) {
     console.log("Best match found:", bestMatch.name, "with score:", highestScore);
   } else {
-    console.log("No match found above threshold of 80");
+    console.log("No match found above threshold of 75");
   }
   return { match: bestMatch, score: highestScore };
 }
@@ -87,15 +101,13 @@ function displayBaxusMatch(product, baxusMatchElement, baxusNameElement, baxusPr
     if (typeof product.price === "number" && typeof bestMatch.price === "number") {
       const diff = product.price - bestMatch.price;
       if (diff > 0) {
-        priceDifferenceElement.textContent = `Save $${diff.toFixed(2)} on BAXUS`;
+        priceDifferenceElement.innerHTML = `<span class="save">Save:</span><span id="price-difference">$${diff.toFixed(2)}</span>`;
         priceDifferenceElement.classList.add("save");
         priceDifferenceElement.classList.remove("loss", "same");
       } else if (diff < 0) {
-        priceDifferenceElement.textContent = `Current site is $${Math.abs(diff).toFixed(2)} cheaper`;
         priceDifferenceElement.classList.add("loss");
         priceDifferenceElement.classList.remove("save", "same");
       } else {
-        priceDifferenceElement.textContent = "Prices are the same";
         priceDifferenceElement.classList.add("same");
         priceDifferenceElement.classList.remove("save", "loss");
       }
@@ -108,12 +120,12 @@ function displayBaxusMatch(product, baxusMatchElement, baxusNameElement, baxusPr
     baxusMatchElement.classList.remove("hidden");
     unavailableMessageElement.classList.add("hidden");
     console.log("BAXUS match displayed:", bestMatch.name, "with score:", score);
-  } else {
-    console.log("No match found, showing unavailable message");
-    baxusMatchElement.classList.add("hidden");
-    matchQualityElement.classList.add("hidden");
+  } else if (product.name && product.name !== "Not supported" && product.name !== "Not found") {
     unavailableMessageElement.textContent = `${product.name} is currently unavailable on BAXUS`;
     unavailableMessageElement.classList.remove("hidden");
+    baxusMatchElement.classList.add("hidden");
+    matchQualityElement.classList.add("hidden");
+    console.log("No match found, showing unavailable message for:", product.name);
   }
 }
 
@@ -172,13 +184,17 @@ function updatePopup(product) {
   const unsupportedContainer = document.getElementById("unsupported-container");
   const apiResult = document.getElementById("api-result");
 
-  if (product.name === "Not supported") {
-    console.log("Displaying unsupported container");
+  if (product.name === "Not supported" || product.name === "Not found") {
+    console.log("Displaying unsupported or scraping failure message");
     baxusMatch.classList.add("hidden");
     matchQuality.classList.add("hidden");
     unavailableMessage.classList.add("hidden");
     unsupportedContainer.classList.remove("hidden");
     apiResult.classList.add("hidden");
+    if (product.name === "Not found") {
+      unavailableMessage.textContent = "Sorry could not detect the name of the bottle";
+      unavailableMessage.classList.remove("hidden");
+    }
   } else {
     console.log("Processing supported product for BAXUS match");
     unsupportedContainer.classList.add("hidden");
@@ -206,7 +222,10 @@ async function checkBaxusDeal() {
   const priceDifference = document.getElementById("price-difference-api");
   const baxusLink = document.getElementById("baxus-link-api");
   const matchQuality = document.getElementById("match-quality-api");
+  const unavailableMessage = document.getElementById("unavailable-message"); // Reusing existing message element
   const loadingState = document.getElementById("loading-state");
+
+  console.log("Starting checkBaxusDeal function");
 
   try {
     // Show loading spinner
@@ -223,24 +242,43 @@ async function checkBaxusDeal() {
       body: JSON.stringify({ url }),
     });
 
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    const data = await response.json();
-    console.log("API response:", data);
-
-    if (data.error) {
-      baxusMatch.classList.add("hidden");
-      matchQuality.classList.add("hidden");
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log("API error response:", errorData);
+      if (response.status === 400) {
+        // Bad request (e.g., scraping error)
+        baxusMatch.classList.add("hidden");
+        matchQuality.classList.add("hidden");
+        unavailableMessage.textContent = "Sorry could not detect the name of the bottle";
+        unavailableMessage.classList.remove("hidden");
+      } else if (response.status === 500) {
+        // Internal server error
+        baxusMatch.classList.add("hidden");
+        matchQuality.classList.add("hidden");
+        unavailableMessage.textContent = "Internal server error, please try again later";
+        unavailableMessage.classList.remove("hidden");
+      }
     } else {
-      displayBaxusMatch(
-        data,
-        baxusMatch,
-        baxusName,
-        baxusPrice,
-        priceDifference,
-        baxusLink,
-        matchQuality,
-        document.createElement("div") // Placeholder, not used for unsupported sites
-      );
+      const data = await response.json();
+      console.log("API response:", data);
+
+      if (!data.name || data.name === "Not found") {
+        baxusMatch.classList.add("hidden");
+        matchQuality.classList.add("hidden");
+        unavailableMessage.textContent = "Sorry could not detect the name of the bottle";
+        unavailableMessage.classList.remove("hidden");
+      } else {
+        displayBaxusMatch(
+          data,
+          baxusMatch,
+          baxusName,
+          baxusPrice,
+          priceDifference,
+          baxusLink,
+          matchQuality,
+          unavailableMessage
+        );
+      }
     }
 
     apiResult.classList.remove("hidden");
@@ -250,6 +288,8 @@ async function checkBaxusDeal() {
     apiResult.classList.remove("hidden");
     baxusMatch.classList.add("hidden");
     matchQuality.classList.add("hidden");
+    unavailableMessage.textContent = "An error occurred, please try again later";
+    unavailableMessage.classList.remove("hidden");
     loadingState.classList.add("hidden"); // Hide spinner
   }
 }

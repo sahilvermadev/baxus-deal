@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 
 # Configuration
-CATALOG_FILE = "baxus_catalog.json"
+CATALOG_FILE = "../baxus-extension/baxus_catalog.json"
 BAXUS_API_URL = "https://services.baxus.co/api/search/listings"
 PAGE_SIZE = 1000  # Increased to fetch more bottles per request
 REQUEST_DELAY = 0.5  # Reduced delay between requests (seconds)

@@ -8,7 +8,6 @@ from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, BrowserConfig, CrawlResu
 from crawl4ai import LLMExtractionStrategy, LLMConfig
 import logging
 from dotenv import load_dotenv
-import pkg_resources
 
 # Load environment variables
 load_dotenv()
@@ -16,10 +15,6 @@ load_dotenv()
 # Set up logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
-
-# Check crawl4ai version
-crawl4ai_version = pkg_resources.get_distribution("crawl4ai").version
-logger.info(f"Using crawl4ai version: {crawl4ai_version}")
 
 app = FastAPI(title="Bottle Scraper API", description="API to scrape alcohol bottle name and price from a webpage.")
 

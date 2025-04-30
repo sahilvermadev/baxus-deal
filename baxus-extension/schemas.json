@@ -28,5 +28,55 @@
       "pricePrioritySelector": "div#edlpPrice.priceTxt__4a663926",
       "fallbackPriceSelector": ""
     }
+  ],
+  [
+      "mgmrun.com",
+      {
+        "name": "MGM Run",
+        "version": "1.0",
+        "productNameSelector": "h1[data-hook=\"product-name\"]",
+        "pricePrioritySelector": "span[data-hook=\"product-price-discount-main-price\"]",
+        "fallbackPriceSelector": ""
+      }
+  ],
+  [
+    "wine.com",
+    {
+      "name": "Wine.com",
+      "version": "1.0",
+      "productNameSelector": "h1.pipName",
+      "pricePrioritySelector": "meta[itemprop=\"price\"]",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "danmurphys.com.au",
+    {
+      "name": "Dan Murphy's",
+      "version": "1.0",
+      "productNameSelector": "div.product-title__name",
+      "pricePrioritySelector": "div.pack__price--member",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "masterofmalt.com",
+    {
+      "name": "Master of Malt",
+      "version": "1.0",
+      "productNameSelector": "h1#ContentPlaceHolder1_ProductTitle",
+      "pricePrioritySelector": "span#ContentPlaceHolder1_ProductPrice",
+      "fallbackPriceSelector": "span#ContentPlaceHolder1_ProductPriceDiscounted"
+    }
+  ],
+  [
+    "canawineco.com",
+    {
+      "name": "Cana Wine Company",
+      "version": "1.0",
+      "productNameSelector": "h1.product-title",
+      "pricePrioritySelector": "div.price__current span.money",
+      "fallbackPriceSelector": ""
+    }
   ]
 ]

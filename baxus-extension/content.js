@@ -61,6 +61,13 @@ async function scrapeProductData() {
 
   const product = { name, price };
   console.log("Scraped product:", product);
+
+  // Send product data to service worker if website is supported
+  if (product.name !== "Not supported") {
+    console.log("Sending product data to service worker...");
+    chrome.runtime.sendMessage({ action: "checkMatch", product });
+  }
+
   return product;
 }
 
@@ -80,4 +87,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 setTimeout(() => {
   scrapeProductData();
-},);
+}, 2000);
