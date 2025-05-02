@@ -62,7 +62,6 @@ async def extract_bottle_data(url: str) -> dict:
         viewport_height=1080,
         viewport_width=1920,
         headless=True,
-        verbose=True,
     )) as crawler:
         try:
             results: list[CrawlResult] = await crawler.arun(url=url, config=config)

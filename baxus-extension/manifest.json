@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Baxus deal",
+  "name": "Baxus Deal",
   "version": "1.0.0",
-  "description": "Find you the best deals from baxus",
+  "description": "Find you the best deals from BAXUS",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -16,8 +16,12 @@
       "128": "icons/icon128.png"
     }
   },
-  "permissions": ["activeTab", "tabs"],
-  "host_permissions": ["<all_urls>", "http://localhost:8000/*"],
+  "permissions": ["activeTab", "tabs", "storage", "alarms"],
+  "host_permissions": [
+    "<all_urls>",
+    "http://localhost:8000/*",
+    "https://services.baxus.co/*"
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -26,7 +30,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["schemas.json", "baxus_catalog.json", "fuzzball.umd.min.js"],
+      "resources": ["schemas.json", "fuzzball.umd.min.js"],
       "matches": ["<all_urls>"]
     }
   ],
