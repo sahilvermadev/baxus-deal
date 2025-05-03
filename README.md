@@ -193,11 +193,11 @@ To contribute to the project:
 ## 🎥 Demo
 
 <div>
-    <a href="https://www.loom.com/share/7ff52b67b5094d2daedcb6a2a82b18bb">
-      <p>Baxis Deals Demo 🍷 - Watch Video</p>
+    <a href="https://www.loom.com/share/a0faed80516248e8af840ea737596d71">
+      <p>Baxithon Extension Demo - Watch Video</p>
     </a>
-    <a href="https://www.loom.com/share/7ff52b67b5094d2daedcb6a2a82b18bb">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/7ff52b67b5094d2daedcb6a2a82b18bb-76fec21ed551d7a6-full-play.gif">
+    <a href="https://www.loom.com/share/a0faed80516248e8af840ea737596d71">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/a0faed80516248e8af840ea737596d71-c620ee293c90ecd9-full-play.gif">
     </a>
   </div>
 
