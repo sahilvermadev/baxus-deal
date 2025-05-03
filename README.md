@@ -192,7 +192,14 @@ To contribute to the project:
 
 ## 🎥 Demo
 
-[Insert a screenshot or link to a demo video here to showcase the extension in action.]
+<div>
+    <a href="https://www.loom.com/share/7ff52b67b5094d2daedcb6a2a82b18bb">
+      <p>Baxis Deals Demo 🍷 - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/7ff52b67b5094d2daedcb6a2a82b18bb">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/7ff52b67b5094d2daedcb6a2a82b18bb-76fec21ed551d7a6-full-play.gif">
+    </a>
+  </div>
 
 ---
 
