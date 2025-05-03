@@ -92,13 +92,24 @@ async function loadCatalogFromStorage() {
 }
 
 // Initialize catalog on startup
-loadCatalogFromStorage().then(catalog => {
-  baxusCatalog = catalog ? catalog.bottles : null;
-  if (!baxusCatalog) {
-    console.log("No catalog in storage, fetching new one");
-    updateCatalog();
+async function initializeCatalog() {
+  try {
+    const catalog = await loadCatalogFromStorage();
+    if (catalog && catalog.bottles) {
+      baxusCatalog = catalog.bottles;
+      console.log("Catalog loaded from storage");
+    } else {
+      console.log("No catalog in storage, fetching new one");
+      await updateCatalog();
+    }
+  } catch (error) {
+    console.error("Failed to initialize catalog:", error);
+    await updateCatalog(); // Fallback to fetching
   }
-});
+}
+
+// Run initialization
+initializeCatalog();
 
 // Set up periodic updates
 chrome.alarms.create("refreshCatalog", { periodInMinutes: 1440 }); // 24 hours
@@ -162,19 +173,56 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const product = message.product;
     if (!product || !product.name || !product.price) {
       console.log("Invalid product data");
-      return;
+      sendResponse({ error: "Invalid product data" });
+      return true;
     }
-    if (!baxusCatalog) {
-      console.log("Catalog not loaded yet");
-      return;
-    }
-    const bestMatch = findBestMatch(product.name);
-    if (bestMatch && typeof product.price === "number" && typeof bestMatch.match.price === "number") {
-      const savings = product.price - bestMatch.match.price;
-      if (savings > 0) {
-        console.log(`Savings found: $${savings}, opening popup`);
-        chrome.action.openPopup();
+
+    // Ensure catalog is loaded
+    const ensureCatalog = async () => {
+      if (baxusCatalog) return baxusCatalog;
+      const catalog = await loadCatalogFromStorage();
+      if (catalog && catalog.bottles) {
+        baxusCatalog = catalog.bottles;
+        return baxusCatalog;
       }
-    }
+      // If no catalog in storage, fetch a new one
+      await updateCatalog();
+      return baxusCatalog;
+    };
+
+    ensureCatalog()
+      .then(() => {
+        if (!baxusCatalog) {
+          console.log("Catalog failed to load");
+          sendResponse({ error: "Catalog not loaded" });
+          return;
+        }
+        const bestMatch = findBestMatch(product.name);
+        if (bestMatch && typeof product.price === "number" && typeof bestMatch.match.price === "number") {
+          const savings = product.price - bestMatch.match.price;
+          if (savings > 0) {
+            console.log(`Savings found: $${savings}, attempting to open popup`);
+            try {
+              chrome.action.openPopup();
+              console.log("Popup opened successfully");
+              sendResponse({ status: "Popup opened", savings });
+            } catch (error) {
+              console.error("Failed to open popup:", error);
+              sendResponse({ status: "Popup failed", error: error.message });
+            }
+          } else {
+            sendResponse({ status: "No savings found" });
+          }
+        } else {
+          sendResponse({ status: "No match found" });
+        }
+      })
+      .catch((error) => {
+        console.error("Error ensuring catalog:", error);
+        sendResponse({ error: "Failed to load catalog" });
+      });
+
+    // Keep the message channel open for async response
+    return true;
   }
 });

@@ -78,5 +78,76 @@
       "pricePrioritySelector": "div.price__current span.money",
       "fallbackPriceSelector": ""
     }
+  ],
+  [
+    "caskcartel.com",
+    {
+      "name": "Cask Cartel",
+      "version": "1.0",
+      "productNameSelector": "h1.product-title",
+      "pricePrioritySelector": "strong.price__current",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "whisky-online.com",
+    {
+      "name": "Whisky Online",
+      "version": "1.0",
+      "productNameSelector": "h1.h3",
+      "pricePrioritySelector": "span.price-item--regular",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "masterofmalt.com",
+    {
+      "name": "Master of Malt",
+      "version": "1.0",
+      "productNameSelector": "h1.product-main__name",
+      "pricePrioritySelector": "p.product-action__price",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "spiritsoffrance.com.au",
+    {
+      "name": "Spirits of France",
+      "version": "1.0",
+      "productNameSelector": "h1.product-title",
+      "pricePrioritySelector": "strong.price__current",
+      "fallbackPriceSelector": "",
+      "currencySelector": "square-placement[data-currency]"
+    }
+  ],
+  [
+    "therarewhiskeyshop.com",
+    {
+      "name": "The Rare Whiskey Shop",
+      "version": "1.0",
+      "productNameSelector": "h1.product-single__title",
+      "pricePrioritySelector": "span.product__price",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "lochsofwhisky.com",
+    {
+      "name": "Lochs of Whisky",
+      "version": "1.0",
+      "productNameSelector": "h1.page-title span.base",
+      "pricePrioritySelector": "span.price-wrapper span.price",
+      "fallbackPriceSelector": ""
+    }
+  ],
+  [
+    "thewhiskyexchange.com",
+    {
+      "name": "The Whisky Exchange",
+      "version": "1.0",
+      "productNameSelector": "h1.product-main__name",
+      "pricePrioritySelector": "p.product-action__price",
+      "fallbackPriceSelector": "p.product-action__vat-price"
+    }
   ]
-]
+] 

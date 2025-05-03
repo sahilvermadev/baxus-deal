@@ -142,6 +142,12 @@ The extension supports the following websites, as defined in `schemas.json`:
 - [Dan Murphy's](https://danmurphys.com.au)
 - [Master of Malt](https://masterofmalt.com)
 - [Cana Wine Company](https://canawineco.com)
+- [Cask Cartel](https://caskcartel.com)
+- [Whisky Online](https://whisky-online.com)
+- [Spirits of France](https://spiritsoffrance.com.au)
+- [The Rare Whiskey Shop](https://therarewhiskeyshop.com)
+- [Lochs of Whisky](https://lochsofwhisky.com)
+- [The Whisky Exchange](https://thewhiskyexchange.com)
 
 ---
 
