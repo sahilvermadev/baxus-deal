@@ -85,9 +85,9 @@ The backend server is essential for scraping unsupported websites via an API.
    crawl4ai-setup
    ```
 7. **Add the API Key**  
-   Add your Grok API key to the `.env` file in the `backend_server` directory. Create the file if it doesn’t exist, and add:  
+   Add your Groq qwen-qwq-32b API key to the `.env` file in the `backend_server` directory. Create the file if it doesn’t exist, and add:  
    ```plaintext
-   GROK_API_KEY=your-api-key-here
+   GROQ_API_KEY=your-api-key-here
    ```
    Replace `your-api-key-here` with your actual API key.
 8. **Start the Server**  
