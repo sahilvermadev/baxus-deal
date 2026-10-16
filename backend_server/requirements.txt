@@ -1,0 +1,5 @@
+# Prototype dependencies; no locked environment is recorded.
+crawl4ai
+fastapi
+uvicorn
+python-dotenv
