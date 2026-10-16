@@ -1,0 +1,2 @@
+# Bundled third-party libraries are not authored application code.
+/baxus-extension/fuzzball.umd.min.js linguist-vendored=true
